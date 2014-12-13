@@ -1,3 +1,14 @@
+function Shape(x, y) {
+  var colors = ['red', 'blue', 'green', 'yellow', 'magenta'];
+
+  var rand = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
+
+  this.color = colors[rand];
+  this.radius = 50;
+  this.x = x + this.radius;
+  this.y = y + this.radius;
+}
+
 function drawRect(x, y, w, h, color) {
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
@@ -21,42 +32,27 @@ function getRandomInt(min, max) {
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-ctx.canvas.width = window.innerWidth * 0.95;
-ctx.canvas.height = window.innerHeight * 0.95;
-
 var SCREEN_WIDTH = ctx.canvas.width;
 var SCREEN_HEIGHT = ctx.canvas.height;
 
-var ball = {
-  x: SCREEN_WIDTH / 2,
-  y: SCREEN_HEIGHT / 2,
-  radius: SCREEN_HEIGHT / 50,
-  xVel: SCREEN_WIDTH / 100,
-  isStopped: false
-};
+var shapes = []
+shapes.push(new Shape(0, 0))
+//shapes.push(new Shape(100, 0))
 
 function draw() {
   ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+  for(var i = 0; i < shapes.length; i++) {
+    var shape = shapes[i]
+    drawCircle(shape.x, shape.y, shape.radius, shape.color)
+  }
   // Draw elements of the game here.
   // Can use `drawRect` and `drawCircle` function.
   // e.g. draw the ball colored green
-  drawCircle(ball.x, ball.y, ball.radius, 'green');
 }
 
 function tick() {
   // Update game logic here.
   // e.g. moving a ball back and forth across the screen
-
-  if (!ball.isStopped) {
-
-    ball.x += ball.xVel;
-
-    // Reverse when ball hits right or left side of the screen.
-    if ((ball.xVel > 0 && (ball.x + ball.radius) > SCREEN_WIDTH ||
-         (ball.xVel < 0 && (ball.x - ball.radius) < 0))) {
-      ball.xVel = -ball.xVel;
-    }
-  }
 }
 
 function loop(time) {
@@ -68,17 +64,49 @@ function loop(time) {
   });
 }
 
+function move(dir){
+  var right = SCREEN_WIDTH - 50;
+  var left = 50;
+  var top = 50;
+  var bottom = SCREEN_HEIGHT - 50;
+  for(var i = 0; i < shapes.length; i++) {
+    var shape = shapes[i]
+    switch(dir) {
+
+    case 'r':
+      shape.x = right;
+      break;
+    case 'l':
+      shape.x = left;
+      break;
+    case 'u':
+      shape.y = top;
+      break;
+    case 'd':
+      shape.y = bottom;
+      break;
+    default:
+      break;
+    }
+  }
+}
+
 function keyDown(event) {
   var handled = true;
 
   switch (event.keyCode) {
 
-  // Handle user input here when a key is pressed.
-  // A few key constants are defined in /js/key_codes.js
-  // e.g. stops the ball from moving when pressing down the space bar
-
-  case SPACE_KEY:
-    ball.isStopped = true;
+  case RIGHT_KEY:
+    move('r');
+    break;
+  case LEFT_KEY:
+    move('l')
+    break;
+  case UP_KEY:
+    move('u')
+    break;
+  case DOWN_KEY:
+    move('d')
     break;
 
   default:
@@ -96,9 +124,9 @@ function keyUp(event) {
 
   switch (event.keyCode) {
 
-  // Handle user input here when a key is released.
-  // A few key constants are defined in /js/key_codes.js
-  // e.g. starts the ball moving again when releasing space bar
+// Handle user input here when a key is released.
+// A few key constants are defined in /js/key_codes.js
+// e.g. starts the ball moving again when releasing space bar
 
   case SPACE_KEY:
     ball.isStopped = false;

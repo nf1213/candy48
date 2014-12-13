@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Canvas Game Demos</title>
-  </head>
+<html>
+<head>
+  <title>Candy48</title>
+  <style>
+  body {
+    background: #dddddd;
+  }
 
-  <body>
-    <h1>Canvas Game Demos</h1>
+  #canvas {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background: #000000;
+    border: thin inset #aaaaaa;
+  }
+  </style>
+</head>
 
-    <p>A collection of Javascript demos using the HTML <code>canvas</code> element.</p>
+<body>
+  <canvas id="canvas" width="640" height="480">
+    Canvas not supported
+  </canvas>
 
-    <ul>
-      <li><a href="/pong.html">One-Player Pong</a></li>
-      <li><a href="/flappy.html">Flappy Wizard</a></li>
-    </ul>
-
-  </body>
+  <script src="/js/key_codes.js"></script>
+  <script src="/js/candy48/candy48.js"></script>
+</body>
 </html>
