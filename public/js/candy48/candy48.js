@@ -1,14 +1,3 @@
-function Shape(x, y) {
-  var colors = ['red', 'blue', 'green', 'yellow', 'magenta'];
-
-  var rand = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
-
-  this.color = colors[rand];
-  this.radius = 50;
-  this.x = x + this.radius;
-  this.y = y + this.radius;
-}
-
 function drawRect(x, y, w, h, color) {
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
@@ -35,19 +24,18 @@ var ctx = canvas.getContext('2d');
 var SCREEN_WIDTH = ctx.canvas.width;
 var SCREEN_HEIGHT = ctx.canvas.height;
 
-var shapes = []
-shapes.push(new Shape(0, 0))
-//shapes.push(new Shape(100, 0))
+shapes = new Grid(6);
 
 function draw() {
   ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-  for(var i = 0; i < shapes.length; i++) {
-    var shape = shapes[i]
-    drawCircle(shape.x, shape.y, shape.radius, shape.color)
+  for(var i = 0; i < shapes.cells.length; i++) {
+    for(var j = 0; j < shapes.cells[i].length; j++) {
+      if (shapes.cells[i][j]) {
+        var shape = shapes.cells[i][j];
+        drawCircle(shape.xlocation(i,j), shape.ylocation(i,j), shape.radius, shape.color);
+      }
+    }
   }
-  // Draw elements of the game here.
-  // Can use `drawRect` and `drawCircle` function.
-  // e.g. draw the ball colored green
 }
 
 function tick() {
@@ -65,28 +53,26 @@ function loop(time) {
 }
 
 function move(dir){
-  var right = SCREEN_WIDTH - 50;
-  var left = 50;
-  var top = 50;
-  var bottom = SCREEN_HEIGHT - 50;
-  for(var i = 0; i < shapes.length; i++) {
-    var shape = shapes[i]
-    switch(dir) {
+  for(var i = 0; i < shapes.cells.length; i++) {
+    for(var j = 0; j < shapes[i].cellse.length; j++) {
+    var shape = shapes.cells[i][j]
+      switch(dir) {
 
-    case 'r':
-      shape.x = right;
-      break;
-    case 'l':
-      shape.x = left;
-      break;
-    case 'u':
-      shape.y = top;
-      break;
-    case 'd':
-      shape.y = bottom;
-      break;
-    default:
-      break;
+      case 'r':
+
+        break;
+      case 'l':
+
+        break;
+      case 'u':
+
+        break;
+      case 'd':
+
+        break;
+      default:
+        break;
+      }
     }
   }
 }
