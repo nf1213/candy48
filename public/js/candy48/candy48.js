@@ -37,11 +37,16 @@ function draw() {
 function tick() {
   // Update game logic here.
   // e.g. moving a ball back and forth across the screen
+  if(shapes.available_cells().length === 0){
+    ctx.strokeStyle = 'black'
+    ctx.fillStyle = 'black';
+    drawTextCentered(ctx, "Game Over", SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel')
+  }
 }
 
 function loop(time) {
-  tick();
   draw();
+  tick();
 
   window.requestAnimationFrame(function(time) {
     loop(time);
@@ -86,7 +91,6 @@ function move(dir){
   case 'u':
     for(var i = 0; i < size; i++) {
       arr1 = [];
-      arr2 = [];
       for(var j = 0; j < size; j++) {
         s = shapes.cells[j][i];
         shapes.cells[j][i] = null;
