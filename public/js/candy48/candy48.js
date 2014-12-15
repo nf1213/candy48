@@ -49,9 +49,9 @@ function loop(time) {
 }
 
 function move(dir){
+  var size = shapes.cells.length;
   switch(dir) {
   case 'r':
-    var size = shapes.cells.length;
     for(var i = 0; i < size; i++) {
       var arr1 = [];
       var arr2 = [];
@@ -68,7 +68,6 @@ function move(dir){
     }
     break;
   case 'l':
-    var size = shapes.cells.length;
     for(var i = 0; i < size; i++) {
       var arr1 = [];
       var arr2 = [];
@@ -85,9 +84,49 @@ function move(dir){
     }
     break;
   case 'u':
+    for(var i = 0; i < size; i++) {
+      arr1 = [];
+      arr2 = [];
+      for(var j = 0; j < size; j++) {
+        s = shapes.cells[j][i];
+        shapes.cells[j][i] = null;
+        if(s) {
+          arr1.push(s);
+        }
+      }
+      arr1 = arr1.reverse();
+      for(var j = 0; j < size; j++) {
+        if(arr1.length > 0) {
+          shapes.cells[j][i] = arr1.pop();
+        }
+      }
+    }
 
     break;
   case 'd':
+    for(var i = 0; i < size; i++) {
+      arr1 = [];
+      arr2 = [];
+      for(var j = 0; j < size; j++) {
+        s = shapes.cells[j][i];
+        shapes.cells[j][i] = null;
+        if(s) {
+          arr1.push(s);
+        }
+        else {
+          arr2.push(null)
+        }
+      }
+      arr1 = arr1.reverse();
+      for(var j = 0; j < size; j++) {
+        if(arr2.length > 0) {
+          shapes.cells[j][i] = arr2.pop();
+        }
+        else {
+          shapes.cells[j][i] = arr1.pop()
+        }
+      }
+    }
 
     break;
   default:
