@@ -14,10 +14,6 @@ function drawCircle(x, y, radius, color) {
   ctx.fill();
 }
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
@@ -32,7 +28,7 @@ function draw() {
     for(var j = 0; j < shapes.cells[i].length; j++) {
       if (shapes.cells[i][j]) {
         var shape = shapes.cells[i][j];
-        drawCircle(shape.xlocation(i,j), shape.ylocation(i,j), shape.radius, shape.color);
+        drawCircle(shape.xlocation(j,i), shape.ylocation(j,i), shape.radius, shape.color);
       }
     }
   }
@@ -53,28 +49,51 @@ function loop(time) {
 }
 
 function move(dir){
-  for(var i = 0; i < shapes.cells.length; i++) {
-    for(var j = 0; j < shapes[i].cellse.length; j++) {
-    var shape = shapes.cells[i][j]
-      switch(dir) {
-
-      case 'r':
-
-        break;
-      case 'l':
-
-        break;
-      case 'u':
-
-        break;
-      case 'd':
-
-        break;
-      default:
-        break;
+  switch(dir) {
+  case 'r':
+    var size = shapes.cells.length;
+    for(var i = 0; i < size; i++) {
+      var arr1 = [];
+      var arr2 = [];
+      for(var j = 0; j < size; j++) {
+        s = shapes.cells[i].pop()
+        if(!s){
+          arr1.push(null);
+        }
+        else {
+          arr2.push(s);
+        }
       }
+      shapes.cells[i] = arr1.concat(arr2.reverse());
     }
+    break;
+  case 'l':
+    var size = shapes.cells.length;
+    for(var i = 0; i < size; i++) {
+      var arr1 = [];
+      var arr2 = [];
+      for(var j = 0; j < size; j++) {
+        s = shapes.cells[i].pop()
+        if(!s){
+          arr1.push(null);
+        }
+        else {
+          arr2.push(s);
+        }
+      }
+      shapes.cells[i] = arr2.reverse().concat(arr1);
+    }
+    break;
+  case 'u':
+
+    break;
+  case 'd':
+
+    break;
+  default:
+    break;
   }
+  shapes.generate_new_shape();
 }
 
 function keyDown(event) {
@@ -110,16 +129,12 @@ function keyUp(event) {
 
   switch (event.keyCode) {
 
-// Handle user input here when a key is released.
-// A few key constants are defined in /js/key_codes.js
-// e.g. starts the ball moving again when releasing space bar
-
   case SPACE_KEY:
-    ball.isStopped = false;
+
     break;
 
   default:
-    handled = false;
+
     break;
   }
 
