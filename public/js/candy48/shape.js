@@ -6,6 +6,13 @@ function Shape(size) {
   this.color = colors[rand];
   this.size = size;
   this.radius = this.size / 2;
+
+  this.equals = function(shape) {
+    if(this.color == shape.color) {
+      return true;
+    }
+    return false
+  }
 }
 
 Shape.prototype.xlocation = function(x,y) {
