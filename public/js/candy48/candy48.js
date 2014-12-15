@@ -53,91 +53,93 @@ function loop(time) {
   });
 }
 
-function move(dir){
+function moveRight () {
   var size = shapes.cells.length;
-  switch(dir) {
-  case 'r':
-    for(var i = 0; i < size; i++) {
-      var arr1 = [];
-      var arr2 = [];
-      for(var j = 0; j < size; j++) {
-        s = shapes.cells[i].pop()
-        if(!s){
-          arr1.push(null);
-        }
-        else {
-          arr2.push(s);
-        }
+  for(var i = 0; i < size; i++) {
+    var arr1 = [];
+    var arr2 = [];
+    for(var j = 0; j < size; j++) {
+      s = shapes.cells[i].pop()
+      if(!s){
+        arr1.push(null);
       }
-      shapes.cells[i] = arr1.concat(arr2.reverse());
-    }
-    break;
-  case 'l':
-    for(var i = 0; i < size; i++) {
-      var arr1 = [];
-      var arr2 = [];
-      for(var j = 0; j < size; j++) {
-        s = shapes.cells[i].pop()
-        if(!s){
-          arr1.push(null);
-        }
-        else {
-          arr2.push(s);
-        }
-      }
-      shapes.cells[i] = arr2.reverse().concat(arr1);
-    }
-    break;
-  case 'u':
-    for(var i = 0; i < size; i++) {
-      arr1 = [];
-      for(var j = 0; j < size; j++) {
-        s = shapes.cells[j][i];
-        shapes.cells[j][i] = null;
-        if(s) {
-          arr1.push(s);
-        }
-      }
-      arr1 = arr1.reverse();
-      for(var j = 0; j < size; j++) {
-        if(arr1.length > 0) {
-          shapes.cells[j][i] = arr1.pop();
-        }
+      else {
+        arr2.push(s);
       }
     }
-
-    break;
-  case 'd':
-    for(var i = 0; i < size; i++) {
-      arr1 = [];
-      arr2 = [];
-      for(var j = 0; j < size; j++) {
-        s = shapes.cells[j][i];
-        shapes.cells[j][i] = null;
-        if(s) {
-          arr1.push(s);
-        }
-        else {
-          arr2.push(null)
-        }
-      }
-      arr1 = arr1.reverse();
-      for(var j = 0; j < size; j++) {
-        if(arr2.length > 0) {
-          shapes.cells[j][i] = arr2.pop();
-        }
-        else {
-          shapes.cells[j][i] = arr1.pop()
-        }
-      }
-    }
-
-    break;
-  default:
-    break;
+    shapes.cells[i] = arr1.concat(arr2.reverse());
   }
   shapes.generate_new_shape();
 }
+
+function moveLeft() {
+  var size = shapes.cells.length;
+  for(var i = 0; i < size; i++) {
+    var arr1 = [];
+    var arr2 = [];
+    for(var j = 0; j < size; j++) {
+      s = shapes.cells[i].pop()
+      if(!s){
+        arr1.push(null);
+      }
+      else {
+        arr2.push(s);
+      }
+    }
+    shapes.cells[i] = arr2.reverse().concat(arr1);
+  }
+  shapes.generate_new_shape();
+}
+
+function moveUp() {
+  var size = shapes.cells.length;
+  for(var i = 0; i < size; i++) {
+    arr1 = [];
+    for(var j = 0; j < size; j++) {
+      s = shapes.cells[j][i];
+      shapes.cells[j][i] = null;
+      if(s) {
+        arr1.push(s);
+      }
+    }
+    arr1 = arr1.reverse();
+    for(var j = 0; j < size; j++) {
+      if(arr1.length > 0) {
+        shapes.cells[j][i] = arr1.pop();
+      }
+    }
+  }
+  shapes.generate_new_shape();
+}
+
+function moveDown() {
+  var size = shapes.cells.length;
+  for(var i = 0; i < size; i++) {
+    arr1 = [];
+    arr2 = [];
+    for(var j = 0; j < size; j++) {
+      s = shapes.cells[j][i];
+      shapes.cells[j][i] = null;
+      if(s) {
+        arr1.push(s);
+      }
+      else {
+        arr2.push(null)
+      }
+    }
+    arr1 = arr1.reverse();
+    for(var j = 0; j < size; j++) {
+      if(arr2.length > 0) {
+        shapes.cells[j][i] = arr2.pop();
+      }
+      else {
+        shapes.cells[j][i] = arr1.pop()
+      }
+    }
+  }
+  shapes.generate_new_shape();
+}
+
 
 function keyDown(event) {
   var handled = true;
@@ -145,18 +147,17 @@ function keyDown(event) {
   switch (event.keyCode) {
 
   case RIGHT_KEY:
-    move('r');
+    moveRight();
     break;
   case LEFT_KEY:
-    move('l')
+    moveLeft()
     break;
   case UP_KEY:
-    move('u')
+    moveUp()
     break;
   case DOWN_KEY:
-    move('d')
+    moveDown()
     break;
-
   default:
     handled = false;
     break;
@@ -171,10 +172,6 @@ function keyUp(event) {
   var handled = true;
 
   switch (event.keyCode) {
-
-  case SPACE_KEY:
-
-    break;
 
   default:
 
