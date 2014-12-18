@@ -20,7 +20,7 @@ var ctx = canvas.getContext('2d');
 var SCREEN_WIDTH = ctx.canvas.width;
 var SCREEN_HEIGHT = ctx.canvas.height;
 
-shapes = new Grid(6);
+var shapes = new Grid(5);
 
 function draw() {
   ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -35,8 +35,9 @@ function draw() {
 }
 
 function tick() {
-  // Update game logic here.
-  // e.g. moving a ball back and forth across the screen
+
+  shapes.threes();
+
   if(shapes.available_cells().length === 0){
     ctx.strokeStyle = 'black'
     ctx.fillStyle = 'black';

@@ -1,5 +1,5 @@
 function Shape(size) {
-  var colors = ['red', 'blue', 'green', 'yellow', 'magenta'];
+  var colors = ['red', 'blue', 'green', 'yellow', '#ffaaff'];
 
   var rand = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
 

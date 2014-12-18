@@ -8,6 +8,12 @@ function Grid(size) {
     var space = available[getRandomInt(0, available.length - 1)];
     this.cells[space.i][space.j] = new Shape(this.cell_size)
   }
+
+  this.threes = function() {
+    this.cells = this.findThrees(this.cells);
+    //this.cells = this.transform();
+  }
+
 }
 
 Grid.prototype.initial = function() {
@@ -37,4 +43,39 @@ Grid.prototype.available_cells = function() {
     }
   }
   return available;
+}
+
+// Grid.prototype.transform = function() {
+//   cells = this.cells;
+//   new_cells = []
+//
+//   for(var i=0; i < this.size; i++) {
+//     new_cells[i] = [];
+//     for(var j=0; j < this.size; j++) {
+//       new_cells[j][i] = cells[i];
+//     }
+//   }
+//   return new_cells;
+// }
+
+Grid.prototype.findThrees = function(array) {
+  cellArray = array;
+  for(var i=0; i < this.size; i++) {
+    for(var j=0; j < this.size; j++) {
+      try {
+        left = j - 1;
+        right = j + 1;
+        if(cellArray[i][j].equals(cellArray[i][left]) && cellArray[i][j].equals(cellArray[i][right])) {
+          cellArray[i][j] = null;
+          cellArray[i][right] = null;
+          cellArray[i][left] = null;
+        }
+      }
+      catch(err) {
+
+      }
+    }
+  }
+
+  return cellArray;
 }
