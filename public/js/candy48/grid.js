@@ -79,7 +79,7 @@ Grid.prototype.findThrees = function(array) {
           cellArray[i][j] = null;
           cellArray[i][right] = null;
           cellArray[i][left] = null;
-          this.score += 100;
+          this.score = this.score + 100;
         }
       }
       catch(err) {
