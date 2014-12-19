@@ -42,8 +42,7 @@ function tick() {
     ctx.strokeStyle = 'black'
     ctx.fillStyle = 'black';
     drawTextCentered(ctx, "Game Over! Score: " + shapes.score, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel');
-    //alert("Score: " + shapes.score);
-
+    
     return false;
   }
   return true;
