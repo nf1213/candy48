@@ -2,6 +2,7 @@ function Grid(size) {
   this.size = size;
   this.cell_size = 100;
   this.cells = this.initial();
+  this.score = 0;
 
   this.generate_new_shape = function() {
     var available = this.available_cells()
@@ -78,6 +79,7 @@ Grid.prototype.findThrees = function(array) {
           cellArray[i][j] = null;
           cellArray[i][right] = null;
           cellArray[i][left] = null;
+          this.score += 100;
         }
       }
       catch(err) {
