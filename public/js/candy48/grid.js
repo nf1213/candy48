@@ -57,6 +57,7 @@ Grid.prototype.transform = function(array) {
           cellArray[j][i] = null;
           cellArray[right][i] = null;
           cellArray[left][i] = null;
+          this.score = this.score + 100;
         }
       }
       catch(err) {
