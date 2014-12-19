@@ -11,7 +11,7 @@ function Grid(size) {
 
   this.threes = function() {
     this.cells = this.findThrees(this.cells);
-    //this.cells = this.transform();
+    this.cells = this.transform(this.cells);
   }
 
 }
@@ -45,18 +45,27 @@ Grid.prototype.available_cells = function() {
   return available;
 }
 
-// Grid.prototype.transform = function() {
-//   cells = this.cells;
-//   new_cells = []
-//
-//   for(var i=0; i < this.size; i++) {
-//     new_cells[i] = [];
-//     for(var j=0; j < this.size; j++) {
-//       new_cells[j][i] = cells[i];
-//     }
-//   }
-//   return new_cells;
-// }
+Grid.prototype.transform = function(array) {
+  cellArray = array;
+  for(var i=0; i < this.size; i++) {
+    for(var j=0; j < this.size; j++) {
+      try {
+        left = j - 1;
+        right = j + 1;
+        if(cellArray[j][i].equals(cellArray[left][i]) && cellArray[j][i].equals(cellArray[right][i])) {
+          cellArray[j][i] = null;
+          cellArray[right][i] = null;
+          cellArray[left][i] = null;
+        }
+      }
+      catch(err) {
+
+      }
+    }
+  }
+
+  return cellArray;
+}
 
 Grid.prototype.findThrees = function(array) {
   cellArray = array;
