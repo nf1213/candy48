@@ -43,16 +43,20 @@ function tick() {
     ctx.fillStyle = 'black';
     alert("Score: " + shapes.score);
     drawTextCentered(ctx, "Game Over", SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel');
+
+    return false;
   }
+  return true;
 }
 
 function loop(time) {
   draw();
-  tick();
 
-  window.requestAnimationFrame(function(time) {
-    loop(time);
-  });
+  if (tick()) {
+    window.requestAnimationFrame(function(time) {
+      loop(time);
+    });
+  }
 }
 
 function moveRight () {
