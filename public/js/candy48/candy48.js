@@ -41,8 +41,8 @@ function tick() {
   if(shapes.available_cells().length === 0){
     ctx.strokeStyle = 'black'
     ctx.fillStyle = 'black';
-    alert("Score: " + shapes.score);
-    drawTextCentered(ctx, "Game Over", SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel');
+    drawTextCentered(ctx, "Game Over! Score: " + shapes.score, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel');
+    //alert("Score: " + shapes.score);
 
     return false;
   }
