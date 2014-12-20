@@ -1,9 +1,5 @@
-function Shape(size) {
-  var colors = ['red', 'blue', 'green', 'yellow', '#ffaaff'];
-
-  var rand = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
-
-  this.color = colors[rand];
+function Shape(size, color) {
+  this.color = color;
   this.size = size;
   this.radius = this.size / 2;
 
