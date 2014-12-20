@@ -24,6 +24,9 @@ var shapes = new Grid(5);
 
 function draw() {
   ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+  ctx.strokeStyle = 'black'
+  ctx.fillStyle = 'black';
+  drawTextCentered(ctx, "Score: " + shapes.score, SCREEN_WIDTH/2, 600, 40, 'Ariel');
   for(var i = 0; i < shapes.cells.length; i++) {
     for(var j = 0; j < shapes.cells[i].length; j++) {
       if (shapes.cells[i][j]) {
@@ -41,8 +44,8 @@ function tick() {
   if(shapes.available_cells().length === 0){
     ctx.strokeStyle = 'black'
     ctx.fillStyle = 'black';
-    drawTextCentered(ctx, "Game Over! Score: " + shapes.score, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel');
-    
+    drawTextCentered(ctx, "Game Over!", SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel');
+
     return false;
   }
   return true;
