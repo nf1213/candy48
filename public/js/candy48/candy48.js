@@ -31,7 +31,10 @@ function draw() {
     for(var j = 0; j < shapes.cells[i].length; j++) {
       if (shapes.cells[i][j]) {
         var shape = shapes.cells[i][j];
-        drawCircle(shape.xlocation(j,i), shape.ylocation(j,i), shape.radius, shape.color);
+        var img = new Image();
+        img.src = "shapes/" + shape.shape + ".png"
+        ctx.drawImage(img,shape.xlocation(j,i), shape.ylocation(j,i));
+        //drawCircle(shape.xlocation(j,i), shape.ylocation(j,i), shape.radius, shape.color);
       }
     }
   }
