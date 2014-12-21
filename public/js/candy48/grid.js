@@ -3,31 +3,31 @@ function Grid(size) {
   this.cell_size = 100;
   this.score = 0;
 
-  this.pickColor = function() {
-    var colors = ['red', 'blue', 'yellow', 'orange', 'magenta'];
+  this.pickShape = function() {
+    var shapes = ['circle', 'square', 'diamond', 'star', 'lightning'];
     var level = [0, 300, 700, 2000]
 
     if(this.score >= level[3]) {
-      colors = colors.slice(0, 5)
+      shapes = shapes.slice(0, 5)
     }
     else if(this.score >= level[2]) {
-      colors = colors.slice(0, 4)
+      shapes = shapes.slice(0, 4)
     }
     else if(this.score >= level[1]) {
-      colors = colors.slice(0, 3)
+      shapes = shapes.slice(0, 3)
     }
     else {
-      colors = colors.slice(0, 2)
+      shapes = shapes.slice(0, 2)
     }
 
-    var rand = Math.floor(Math.random() * colors.length);
-    return colors[rand];
+    var rand = Math.floor(Math.random() * shapes.length);
+    return shapes[rand];
   }
 
   this.generate_new_shape = function() {
     var available = this.available_cells();
     var space = available[getRandomInt(0, available.length - 1)];
-    shape = new Shape(this.cell_size, this.pickColor());
+    shape = new Shape(this.cell_size, this.pickShape());
     this.cells[space.i][space.j] = shape;
   }
 
@@ -47,8 +47,8 @@ function Grid(size) {
       }
     }
 
-    cells[0][0] = (new Shape(this.cell_size, this.pickColor()));
-    cells[0][1] = (new Shape(this.cell_size, this.pickColor()));
+    cells[0][0] = (new Shape(this.cell_size, this.pickShape()));
+    cells[0][1] = (new Shape(this.cell_size, this.pickShape()));
 
     return cells;
   }
