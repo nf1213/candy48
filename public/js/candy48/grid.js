@@ -4,19 +4,22 @@ function Grid(size) {
   this.score = 0;
 
   this.pickColor = function() {
-    var colors = [];
-    if(this.score > 300 && this.score < 700) {
-      colors =  ['red', 'blue', 'yellow'];
+    var colors = ['red', 'blue', 'yellow', 'orange', 'magenta'];
+    var level = [0, 300, 700, 2000]
+
+    if(this.score >= level[3]) {
+      colors = colors.slice(0, 5)
     }
-    else if (this.score > 700 && this.score < 1000){
-      colors = ['red', 'blue', 'yellow', 'orange']
+    else if(this.score >= level[2]) {
+      colors = colors.slice(0, 4)
     }
-    else if(this.score > 1000) {
-      colors = ['red', 'blue', 'yellow', 'orange', 'magenta']
+    else if(this.score >= level[1]) {
+      colors = colors.slice(0, 3)
     }
     else {
-      colors = ['red', 'blue']
+      colors = colors.slice(0, 2)
     }
+
     var rand = Math.floor(Math.random() * colors.length);
     return colors[rand];
   }
@@ -44,8 +47,8 @@ function Grid(size) {
       }
     }
 
-    cells[0][0] = (new Shape(this.cell_size, 'red'));
-    cells[0][1] = (new Shape(this.cell_size, 'blue'));
+    cells[0][0] = (new Shape(this.cell_size, this.pickColor()));
+    cells[0][1] = (new Shape(this.cell_size, this.pickColor()));
 
     return cells;
   }
