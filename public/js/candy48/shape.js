@@ -9,12 +9,13 @@ function Shape(size, shape) {
     }
     return false
   }
+
+  this.xlocation = function(x,y) {
+    return (x * this.size)
+  }
+
+  this.ylocation = function(x,y) {
+    return (y * this.size)
+  }
+
 }
-
-Shape.prototype.xlocation = function(x,y) {
-  return (x * this.size)
-};
-
-Shape.prototype.ylocation = function(x,y) {
-  return (y * this.size)
-};

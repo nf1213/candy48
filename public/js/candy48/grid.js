@@ -3,6 +3,26 @@ function Grid(size) {
   this.cell_size = 100;
   this.score = 0;
 
+
+  this.initial = function() {
+    var cells = [];
+
+    for (var x = 0; x < this.size; x++) {
+      var row = cells[x] = [];
+
+      for (var y = 0; y < this.size; y++) {
+        row.push(null);
+      }
+    }
+
+    //cells[0][0] = (new Shape(this.cell_size, this.pickShape()));
+    //cells[0][1] = (new Shape(this.cell_size, this.pickShape()));
+
+    return cells;
+  }
+
+  this.cells = this.initial();
+
   this.pickShape = function() {
     var shapes = ['circle', 'square', 'diamond', 'star', 'lightning'];
     var level = [0, 300, 700, 2000]
@@ -24,37 +44,6 @@ function Grid(size) {
     return shapes[rand];
   }
 
-  this.generate_new_shape = function() {
-    var available = this.available_cells();
-    var space = available[getRandomInt(0, available.length - 1)];
-    shape = new Shape(this.cell_size, this.pickShape());
-    this.cells[space.i][space.j] = shape;
-  }
-
-  this.threes = function() {
-    this.cells = this.findThrees(this.cells);
-    this.cells = this.transform(this.cells);
-  }
-
-  this.initial = function() {
-    var cells = [];
-
-    for (var x = 0; x < this.size; x++) {
-      var row = cells[x] = [];
-
-      for (var y = 0; y < this.size; y++) {
-        row.push(null);
-      }
-    }
-
-    cells[0][0] = (new Shape(this.cell_size, this.pickShape()));
-    cells[0][1] = (new Shape(this.cell_size, this.pickShape()));
-
-    return cells;
-  }
-
-  this.cells = this.initial();
-
   this.available_cells = function() {
     var available = [];
     for(var i = 0; i < this.size; i++) {
@@ -65,6 +54,22 @@ function Grid(size) {
       }
     }
     return available;
+  }
+
+  this.generate_new_shape = function() {
+    var available = this.available_cells();
+    var rand = Math.floor(Math.random() * available.length);
+    var space = available[rand];
+    shape = new Shape(this.cell_size, this.pickShape());
+    this.cells[space.i][space.j] = shape;
+  }
+
+  this.generate_new_shape();
+  this.generate_new_shape();
+
+  this.threes = function() {
+    this.cells = this.findThrees(this.cells);
+    this.cells = this.transform(this.cells);
   }
 
   this.transform = function(array) {

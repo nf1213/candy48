@@ -1,3 +1,13 @@
+function drawTextCentered(context, text, x, y, fontHeight, fontName) {
+  context.font = fontHeight + 'px ' + fontName;
+  var textWidth = context.measureText(text).width;
+
+  var actualX = x - (textWidth / 2);
+  var actualY = y - (fontHeight / 2);
+
+  context.fillText(text, actualX, actualY);
+}
+
 function drawRect(x, y, w, h, color) {
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
@@ -26,7 +36,7 @@ function draw() {
   ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
   ctx.strokeStyle = 'black'
   ctx.fillStyle = 'black';
-  drawTextCentered(ctx, "Score: " + shapes.score, SCREEN_WIDTH/2, 600, 40, 'Ariel');
+  drawTextCentered(ctx, "Score: " + shapes.score, SCREEN_WIDTH/2, 580, 50, 'Ariel');
   for(var i = 0; i < shapes.cells.length; i++) {
     for(var j = 0; j < shapes.cells[i].length; j++) {
       if (shapes.cells[i][j]) {
