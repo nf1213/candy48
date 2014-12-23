@@ -3,7 +3,6 @@ function Grid(size) {
   this.cell_size = 100;
   this.score = 0;
 
-
   this.initial = function() {
     var cells = [];
 
@@ -14,9 +13,6 @@ function Grid(size) {
         row.push(null);
       }
     }
-
-    //cells[0][0] = (new Shape(this.cell_size, this.pickShape()));
-    //cells[0][1] = (new Shape(this.cell_size, this.pickShape()));
 
     return cells;
   }
@@ -110,7 +106,6 @@ function Grid(size) {
           }
         }
         catch(err) {
-
         }
       }
     }
