@@ -55,8 +55,8 @@ function tick() {
   shapes.threes();
 
   if(shapes.available_cells().length === 0){
-    ctx.strokeStyle = 'black'
-    ctx.fillStyle = 'black';
+    ctx.strokeStyle = 'white'
+    ctx.fillStyle = 'white';
     drawTextCentered(ctx, "Game Over!", SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 50, 'Ariel');
 
     return false;
