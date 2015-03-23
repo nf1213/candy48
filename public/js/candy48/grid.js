@@ -20,7 +20,7 @@ function Grid(size) {
   this.cells = this.initial();
 
   this.pickShape = function() {
-    var shapes = ['circle', 'square', 'diamond', 'star', 'lightning'];
+    var shapes = ['blob', 'eystalk', 'fourleg', 'monsterball', 'snake'];
     var level = [0, 300, 700, 2000]
 
     if(this.score >= level[3]) {
