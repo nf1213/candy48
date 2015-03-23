@@ -34,8 +34,7 @@ var shapes = new Grid(5);
 
 function draw() {
   ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-  ctx.strokeStyle = 'black'
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = 'white';
   drawTextCentered(ctx, "Score: " + shapes.score, SCREEN_WIDTH/2, 580, 50, 'Ariel');
   for(var i = 0; i < shapes.cells.length; i++) {
     for(var j = 0; j < shapes.cells[i].length; j++) {
