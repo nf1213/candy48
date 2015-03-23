@@ -1,2 +1,4 @@
 Candy48: A mashup between the popular games 2048 and Candy Crush!
 =================================================================
+
+original: http://nf1213.github.io/candy48/
